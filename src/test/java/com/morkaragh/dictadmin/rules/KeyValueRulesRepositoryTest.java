@@ -4,6 +4,7 @@ import com.morkaragh.dictadmin.user.User;
 import com.morkaragh.dictadmin.user.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,12 +23,15 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
 class KeyValueRulesRepositoryTest {
+
 
     @Autowired
     KeyValueRulesRepository keyValueRulesRepository;
@@ -47,6 +51,12 @@ class KeyValueRulesRepositoryTest {
         registry.add("spring.datasource.password", postgreSQLContainer::getPassword);
         registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
     }
+
+
+    private final String hello = "hello";
+    private final String world = "world";
+
+
     @Test
     @Transactional
     public void testSaveAndLoad() {
@@ -54,15 +64,26 @@ class KeyValueRulesRepositoryTest {
 
         User user = userRepository.save(new User().setLogin("ADMIN").setFullName("АДМИН АДМИНЫЧ"));
 
+
         keyValueRulesRepository.save((KeyValueRule) new KeyValueRule()
-                .setKey("hello")
-                .setValue("world")
+                .setKey(hello)
+                .setValue(world)
                 .setInsertDate(now)
                 .setStartDate(now)
                 .setCreatedBy(user));
 
-        assertTrue(keyValueRulesRepository.findByCreatedBy_LoginIgnoreCase("ADMIN").isPresent());
+        Optional<KeyValueRule> rule = keyValueRulesRepository.findByCreatedBy_LoginIgnoreCase("ADMIN");
+        assertTrue(rule.isPresent());
+        assertEquals(hello, rule.get().getKey());
+        assertEquals(world, rule.get().getValue());
+    }
 
+    @Test
+    @Transactional
+    public void testFindByKey() {
+        keyValueRulesRepository.save((KeyValueRule) new KeyValueRule().setKey(hello).setValue(world).setInsertDate(LocalDate.now()));
+        List<KeyValueRule> byEndDateNullAndKey = keyValueRulesRepository.findByEndDateNullAndKey(hello);
+        assertFalse(byEndDateNullAndKey.isEmpty());
     }
 
 }
