@@ -8,14 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-//@RepositoryRestResource
 public interface KeyValueRulesRepository extends CrudRepository<KeyValueRule, Long> {
 
     Optional<KeyValueRule> findByCreatedBy_LoginIgnoreCase(String login);
 
-//    @RestResource(path = "byKey", rel = "findByKey")
     List<KeyValueRule> findByEndDateNullAndKey(@NonNull String key);
-
-
-
 }
