@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,12 +20,14 @@ public class KeyValueRuleServiceImpl implements KeyValueRuleService{
     }
 
     @Override
-    public void saveNewRule(Rule rule) {
-
+    public void saveNewRule(KeyValueRule rule) {
+        rule.setInsertDate(LocalDate.now());
+        repository.save(rule);
     }
 
     @Override
-    public void deleteRule(Rule rule) {
-
+    public void deleteRule(KeyValueRule rule) {
+        rule.setEndDate(LocalDate.now());
+        repository.save(rule);
     }
 }
