@@ -3,6 +3,7 @@ package com.morkaragh.dictadmin.ui;
 
 import com.morkaragh.dictadmin.ui.components.AppNav;
 import com.morkaragh.dictadmin.ui.components.AppNavItem;
+import com.morkaragh.dictadmin.ui.view.ManageView;
 import com.morkaragh.dictadmin.ui.view.SearchView;
 import com.morkaragh.dictadmin.ui.view.TableView;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -16,7 +17,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
-public class MainUI  extends AppLayout {
+public class MainUI extends AppLayout {
 
     private H2 viewTitle;
 
@@ -53,6 +54,7 @@ public class MainUI  extends AppLayout {
         // SideNav component.
         AppNav nav = new AppNav();
 
+        nav.addItem(new AppNavItem("Управление", ManageView.class, LineAwesomeIcon.ADDRESS_BOOK.create()));
         nav.addItem(new AppNavItem("Поиск", SearchView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
         nav.addItem(new AppNavItem("Таблица", TableView.class, LineAwesomeIcon.TABLE_SOLID.create()));
 

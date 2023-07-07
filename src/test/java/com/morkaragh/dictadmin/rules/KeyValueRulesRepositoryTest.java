@@ -78,4 +78,13 @@ class KeyValueRulesRepositoryTest {
         assertFalse(byEndDateNullAndKey.isEmpty());
     }
 
+    @Test
+    @Transactional
+    public void testFindAll() {
+        keyValueRulesRepository.save((KeyValueRule) new KeyValueRule()
+                .setKey(hello).setValue(world).setInsertDate(LocalDate.now()));
+        List<KeyValueRule> byEndDateNullAndKey = keyValueRulesRepository.findByEndDateNullAndKey(hello);
+        assertFalse(byEndDateNullAndKey.isEmpty());
+    }
+
 }
