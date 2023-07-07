@@ -1,5 +1,6 @@
-package com.morkaragh.dictadmin.rules;
+package com.morkaragh.dictadmin.rules.internal;
 
+import com.morkaragh.dictadmin.rules.KeyValueRule;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;

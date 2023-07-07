@@ -1,12 +1,11 @@
 package com.morkaragh.dictadmin.rules;
 
+import com.morkaragh.dictadmin.rules.internal.KeyValueRulesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class KeyValueRuleServiceImpl implements KeyValueRuleService{
