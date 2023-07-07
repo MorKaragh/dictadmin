@@ -1,19 +1,26 @@
 package com.morkaragh.dictadmin.api;
 
-import jakarta.annotation.security.PermitAll;
+import com.morkaragh.dictadmin.rules.KeyValueRule;
+import com.morkaragh.dictadmin.rules.KeyValueRuleService;
+import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@PermitAll
+import java.util.List;
+
 @RestController
 @RequestMapping("api")
 public class MainController {
 
-    @GetMapping("test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("hello, world");
+    @Autowired
+    KeyValueRuleService service;
+
+    @GetMapping("byKey/{key}")
+    public ResponseEntity<List<KeyValueRule>> test(@PathParam("key") String key) {
+        return ResponseEntity.ok(service.getActualRule(key));
     }
 
 

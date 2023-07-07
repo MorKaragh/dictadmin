@@ -2,12 +2,13 @@ package com.morkaragh.dictadmin.rules;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public interface KeyValueRuleService {
 
-    Optional<KeyValueRule> getActualRule(String key);
+    List<KeyValueRule> getActualRule(String key);
 
     void saveNewRule(Rule rule);
 
