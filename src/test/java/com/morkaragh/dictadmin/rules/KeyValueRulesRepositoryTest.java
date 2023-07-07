@@ -39,6 +39,7 @@ class KeyValueRulesRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
+    @SuppressWarnings("rawtypes")
     @Container
     public static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:11.1")
             .withDatabaseName("dictadmin")
