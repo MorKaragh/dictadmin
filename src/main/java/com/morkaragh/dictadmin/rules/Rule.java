@@ -1,10 +1,7 @@
 package com.morkaragh.dictadmin.rules;
 
 import com.morkaragh.dictadmin.user.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 public class Rule {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "insert_date")
@@ -26,4 +24,48 @@ public class Rule {
     @ManyToOne
     private User createdBy;
 
+    public Long getId() {
+        return id;
+    }
+
+    public Rule setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public LocalDate getInsertDate() {
+        return insertDate;
+    }
+
+    public Rule setInsertDate(LocalDate insertDate) {
+        this.insertDate = insertDate;
+        return this;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public Rule setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public Rule setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+        return this;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Rule setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
 }

@@ -15,4 +15,21 @@ public class KeyValueRule extends Rule {
     @Column(name = "value")
     private String value;
 
+    public String getKey() {
+        return key;
+    }
+
+    public KeyValueRule setKey(String key) {
+        this.key = key;
+        return this;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public KeyValueRule setValue(String value) {
+        this.value = value;
+        return this;
+    }
 }
