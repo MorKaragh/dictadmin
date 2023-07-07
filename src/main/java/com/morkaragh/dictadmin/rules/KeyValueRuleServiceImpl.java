@@ -22,6 +22,9 @@ public class KeyValueRuleServiceImpl implements KeyValueRuleService{
     @Override
     public KeyValueRule saveNewRule(KeyValueRule rule) {
         rule.setInsertDate(LocalDate.now());
+        if (rule.getStartDate() == null || rule.getStartDate().isBefore(LocalDate.now())) {
+            rule.setStartDate(LocalDate.now());
+        }
         return repository.save(rule);
     }
 
