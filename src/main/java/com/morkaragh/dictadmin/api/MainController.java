@@ -2,7 +2,6 @@ package com.morkaragh.dictadmin.api;
 
 import com.morkaragh.dictadmin.rules.KeyValueRule;
 import com.morkaragh.dictadmin.rules.KeyValueRuleService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +22,5 @@ public class MainController {
     public ResponseEntity<List<KeyValueRule>> test(@RequestParam("key") String key) {
         return ResponseEntity.ok(service.getActualRule(key));
     }
-
 
 }
