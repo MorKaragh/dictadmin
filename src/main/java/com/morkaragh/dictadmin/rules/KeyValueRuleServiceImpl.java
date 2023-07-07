@@ -20,14 +20,14 @@ public class KeyValueRuleServiceImpl implements KeyValueRuleService{
     }
 
     @Override
-    public void saveNewRule(KeyValueRule rule) {
+    public KeyValueRule saveNewRule(KeyValueRule rule) {
         rule.setInsertDate(LocalDate.now());
-        repository.save(rule);
+        return repository.save(rule);
     }
 
     @Override
-    public void deleteRule(KeyValueRule rule) {
+    public KeyValueRule deleteRule(KeyValueRule rule) {
         rule.setEndDate(LocalDate.now());
-        repository.save(rule);
+        return repository.save(rule);
     }
 }

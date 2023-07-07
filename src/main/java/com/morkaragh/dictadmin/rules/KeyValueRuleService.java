@@ -10,8 +10,8 @@ public interface KeyValueRuleService {
 
     List<KeyValueRule> getActualRule(String key);
 
-    void saveNewRule(KeyValueRule rule);
+    KeyValueRule saveNewRule(KeyValueRule rule);
 
-    void deleteRule(KeyValueRule rule);
+    KeyValueRule deleteRule(KeyValueRule rule);
 
 }
