@@ -1,12 +1,7 @@
-package com.morkaragh.dictadmin.ui.view;
-
+package com.morkaragh.dictadmin.ui.components;
 
 import com.morkaragh.dictadmin.dictionaries.Agent;
 import com.morkaragh.dictadmin.dictionaries.AgentsDictionary;
-import com.morkaragh.dictadmin.rules.KeyValueRule;
-import com.morkaragh.dictadmin.rules.KeyValueRuleService;
-import com.morkaragh.dictadmin.ui.MainUI;
-import com.morkaragh.dictadmin.ui.components.RulePanel;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
@@ -14,27 +9,22 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
-import jakarta.annotation.security.PermitAll;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-@PermitAll
-@Route(value="search", layout = MainUI.class)
-@PageTitle("Поиск")
-public class SearchView extends HorizontalLayout {
+public class SearchField extends HorizontalLayout {
     private final AgentsDictionary dictionary;
     private final TextField nameFld;
     private final TextField agentContractFld;
     private final RulePanel rulePanel;
+    private final Consumer<List<Agent>> onSelect;
 
-    public SearchView(AgentsDictionary dictionary) {
+    public SearchField(AgentsDictionary dictionary, Consumer<List<Agent>> onSelect) {
+        this.onSelect = onSelect;
         this.dictionary = dictionary;
         this.nameFld = new TextField("Имя агента");
         this.agentContractFld = new TextField("Агентский договор");
@@ -51,13 +41,7 @@ public class SearchView extends HorizontalLayout {
     private ComponentEventListener<ClickEvent<Button>> getSearchClickListener() {
         return e -> {
             List<Agent> agentList = search(nameFld.getValue(), agentContractFld.getValue());
-
-
-            if (CollectionUtils.isEmpty(agentList)) {
-                Notification.show("Не найдено значение", 3000, Notification.Position.MIDDLE);
-            } else {
-                Notification.show("Найдено: " + agentList.size(), 3000, Notification.Position.MIDDLE);
-            }
+            onSelect.accept(agentList);
         };
     }
 

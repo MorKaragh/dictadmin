@@ -4,6 +4,7 @@ import com.morkaragh.dictadmin.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rules")
@@ -14,13 +15,13 @@ public class Rule {
     private Long id;
 
     @Column(name = "insert_date")
-    private LocalDate insertDate;
+    private LocalDateTime insertDate;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @ManyToOne
     private User createdBy;
@@ -34,29 +35,29 @@ public class Rule {
         return this;
     }
 
-    public LocalDate getInsertDate() {
+    public LocalDateTime getInsertDate() {
         return insertDate;
     }
 
-    public Rule setInsertDate(LocalDate insertDate) {
+    public Rule setInsertDate(LocalDateTime insertDate) {
         this.insertDate = insertDate;
         return this;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public Rule setStartDate(LocalDate startDate) {
+    public Rule setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
         return this;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public Rule setEndDate(LocalDate endDate) {
+    public Rule setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
         return this;
     }

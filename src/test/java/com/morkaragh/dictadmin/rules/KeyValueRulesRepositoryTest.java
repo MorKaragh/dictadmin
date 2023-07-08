@@ -14,6 +14,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +53,7 @@ class KeyValueRulesRepositoryTest {
     @Test
     @Transactional
     public void testSaveAndLoad() {
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
 
         User user = userRepository.save(new User().setLogin("ADMIN").setFullName("АДМИН АДМИНЫЧ"));
 
@@ -73,18 +74,18 @@ class KeyValueRulesRepositoryTest {
     @Test
     @Transactional
     public void testFindByKey() {
-        keyValueRulesRepository.save((KeyValueRule) new KeyValueRule().setKey(hello).setValue(world).setInsertDate(LocalDate.now()));
-        List<KeyValueRule> byEndDateNullAndKey = keyValueRulesRepository.findByEndDateNullAndKey(hello);
-        assertFalse(byEndDateNullAndKey.isEmpty());
+        keyValueRulesRepository.save((KeyValueRule) new KeyValueRule().setKey(hello).setValue(world).setInsertDate(LocalDateTime.now()));
+        KeyValueRule byEndDateNullAndKey = keyValueRulesRepository.findByEndDateNullAndKey(hello);
+        assertNotNull(byEndDateNullAndKey);
     }
 
     @Test
     @Transactional
     public void testFindAll() {
         keyValueRulesRepository.save((KeyValueRule) new KeyValueRule()
-                .setKey(hello).setValue(world).setInsertDate(LocalDate.now()));
-        List<KeyValueRule> byEndDateNullAndKey = keyValueRulesRepository.findByEndDateNullAndKey(hello);
-        assertFalse(byEndDateNullAndKey.isEmpty());
+                .setKey(hello).setValue(world).setInsertDate(LocalDateTime.now()));
+        KeyValueRule byEndDateNullAndKey = keyValueRulesRepository.findByEndDateNullAndKey(hello);
+        assertNotNull(byEndDateNullAndKey);
     }
 
 }

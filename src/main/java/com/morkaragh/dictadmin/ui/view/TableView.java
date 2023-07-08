@@ -1,36 +1,37 @@
 package com.morkaragh.dictadmin.ui.view;
 
 
+import com.morkaragh.dictadmin.agent.AgentDescription;
+import com.morkaragh.dictadmin.dictionaries.Agent;
+import com.morkaragh.dictadmin.dictionaries.AgentsDictionary;
+import com.morkaragh.dictadmin.dictionaries.ProgramsDictionary;
+import com.morkaragh.dictadmin.rules.KeyValueRule;
+import com.morkaragh.dictadmin.rules.KeyValueRuleService;
 import com.morkaragh.dictadmin.ui.MainUI;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.textfield.TextField;
+import com.morkaragh.dictadmin.ui.components.SearchField;
+import com.morkaragh.dictadmin.ui.components.Table;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.PermitAll;
 
+import java.util.List;
+import java.util.function.Consumer;
+
 @PermitAll
 @PageTitle("Таблица")
 @Route(value = "table", layout = MainUI.class)
-public class TableView extends HorizontalLayout {
-    private TextField name;
-    private Button sayHello;
+public class TableView extends VerticalLayout {
 
-    public TableView() {
-        name = new TextField("Логин");
-        sayHello = new Button("Искать");
-        sayHello.addClickListener(e -> {
-            Notification.show("Найден по логину: " + name.getValue());
-        });
-        sayHello.addClickShortcut(Key.ENTER);
+    private SearchField searchField;
+    private Table table;
 
-        setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
+    public TableView(KeyValueRuleService service, AgentsDictionary agentsDictionary, ProgramsDictionary programsDictionary) {
 
-        add(name, sayHello);
+        setSpacing(true);
+        searchField = new SearchField(agentsDictionary, agents -> table.displayAgents(agents));
+        table = new Table(programsDictionary, service);
+        add(searchField, table);
 
     }
-
 }

@@ -13,6 +13,6 @@ public interface KeyValueRulesRepository extends CrudRepository<KeyValueRule, Lo
 
     Optional<KeyValueRule> findByCreatedBy_LoginIgnoreCase(String login);
 
-    List<KeyValueRule> findByEndDateNullAndKey(@NonNull String key);
+    KeyValueRule findByEndDateNullAndKey(@NonNull String key);
     List<KeyValueRule> findByKey(@NonNull String key);
 }

@@ -37,8 +37,8 @@ class KeyValueRuleServiceImplTest {
     @Test
     void getActualRule() {
         service.saveNewRule(new KeyValueRule().setValue("value").setKey("key"));
-        List<KeyValueRule> keys = service.getActualRule("key");
-        assertFalse(keys.isEmpty());
+        KeyValueRule keys = service.getActualRule("key");
+        assertNotNull(keys);
     }
 
     @Test

@@ -19,7 +19,7 @@ public class MainController {
     KeyValueRuleService service;
 
     @GetMapping("keyvalue/actual")
-    public ResponseEntity<List<KeyValueRule>> test(@RequestParam("key") String key) {
+    public ResponseEntity<KeyValueRule> test(@RequestParam("key") String key) {
         return ResponseEntity.ok(service.getActualRule(key));
     }
 
