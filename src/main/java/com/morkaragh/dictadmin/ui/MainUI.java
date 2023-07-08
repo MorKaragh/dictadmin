@@ -4,7 +4,6 @@ package com.morkaragh.dictadmin.ui;
 import com.morkaragh.dictadmin.ui.components.AppNav;
 import com.morkaragh.dictadmin.ui.components.AppNavItem;
 import com.morkaragh.dictadmin.ui.view.ManageView;
-import com.morkaragh.dictadmin.ui.view.SearchView;
 import com.morkaragh.dictadmin.ui.view.TableView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -55,7 +54,6 @@ public class MainUI extends AppLayout {
         AppNav nav = new AppNav();
 
         nav.addItem(new AppNavItem("Управление", ManageView.class, LineAwesomeIcon.ADDRESS_BOOK.create()));
-        nav.addItem(new AppNavItem("Поиск", SearchView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
         nav.addItem(new AppNavItem("Таблица", TableView.class, LineAwesomeIcon.TABLE_SOLID.create()));
 
         return nav;

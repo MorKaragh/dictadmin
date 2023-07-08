@@ -1,4 +1,4 @@
-package com.morkaragh.dictadmin.agent;
+package com.morkaragh.dictadmin.ui.components;
 
 import com.morkaragh.dictadmin.ui.common.Label;
 import com.vaadin.flow.component.AbstractField;
@@ -36,41 +36,30 @@ public class LockButtonSelector extends HorizontalLayout {
         selected.setWidth("200px");
         selected.setValue(value);
         selected.setItems(variants);
-        selected.addValueChangeListener(new HasValue.ValueChangeListener<AbstractField.ComponentValueChangeEvent<Select<String>, String>>() {
-            @Override
-            public void valueChanged(AbstractField.ComponentValueChangeEvent<Select<String>, String> event) {
-                saveButton.setVisible(StringUtils.isNotBlank(event.getValue()));
-            }
-        });
+        selected.addValueChangeListener(event -> saveButton.setVisible(StringUtils.isNotBlank(event.getValue())));
 
         saveButton = new Button("Сохранить", new Icon(VaadinIcon.INBOX));
         saveButton.setVisible(false);
-        saveButton.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
-            @Override
-            public void onComponentEvent(ClickEvent<Button> event) {
-                onSave.accept(selected.getValue());
-                setLocked();
-            }
+        saveButton.addClickListener(event -> {
+            onSave.accept(selected.getValue());
+            setLocked();
         });
-        saveButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_SUCCESS);
+        saveButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
 
-        cancelButton = new Button(new Icon(VaadinIcon.CLOSE_BIG));
-        cancelButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_TERTIARY);
+        cancelButton = new Button("Отмена",new Icon(VaadinIcon.CLOSE_BIG));
+        cancelButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY);
         cancelButton.addClickListener(e -> setLocked());
 
         removeBtn = new Button("Удалить", new Icon(VaadinIcon.BAN));
-        removeBtn.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_TERTIARY);
-        removeBtn.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
-            @Override
-            public void onComponentEvent(ClickEvent<Button> event) {
-                onSave.accept(null);
-                selected.setValue(null);
-                setLocked();
-            }
+        removeBtn.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY);
+        removeBtn.addClickListener(event -> {
+            onSave.accept(null);
+            selected.setValue(null);
+            setLocked();
         });
 
         editBtn = new Button("Редактировать");
-        editBtn.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY);
+        editBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_TERTIARY);
         editBtn.addClickListener(event -> setUnlocked());
 
         if (StringUtils.isNotBlank(value)) {

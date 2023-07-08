@@ -1,11 +1,8 @@
 package com.morkaragh.dictadmin.ui.view;
 
 
-import com.morkaragh.dictadmin.agent.AgentDescription;
-import com.morkaragh.dictadmin.dictionaries.Agent;
 import com.morkaragh.dictadmin.dictionaries.AgentsDictionary;
 import com.morkaragh.dictadmin.dictionaries.ProgramsDictionary;
-import com.morkaragh.dictadmin.rules.KeyValueRule;
 import com.morkaragh.dictadmin.rules.KeyValueRuleService;
 import com.morkaragh.dictadmin.ui.MainUI;
 import com.morkaragh.dictadmin.ui.components.SearchField;
@@ -14,9 +11,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.PermitAll;
-
-import java.util.List;
-import java.util.function.Consumer;
 
 @PermitAll
 @PageTitle("Таблица")
@@ -27,11 +21,9 @@ public class TableView extends VerticalLayout {
     private Table table;
 
     public TableView(KeyValueRuleService service, AgentsDictionary agentsDictionary, ProgramsDictionary programsDictionary) {
-
         setSpacing(true);
         searchField = new SearchField(agentsDictionary, agents -> table.displayAgents(agents));
         table = new Table(programsDictionary, service);
         add(searchField, table);
-
     }
 }

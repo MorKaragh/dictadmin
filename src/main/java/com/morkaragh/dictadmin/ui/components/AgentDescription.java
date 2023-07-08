@@ -1,13 +1,9 @@
-package com.morkaragh.dictadmin.agent;
+package com.morkaragh.dictadmin.ui.components;
 
 import com.morkaragh.dictadmin.dictionaries.Agent;
 import com.morkaragh.dictadmin.rules.KeyValueRule;
 import com.morkaragh.dictadmin.ui.common.Label;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.List;

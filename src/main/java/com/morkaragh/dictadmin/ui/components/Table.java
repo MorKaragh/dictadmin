@@ -1,6 +1,5 @@
 package com.morkaragh.dictadmin.ui.components;
 
-import com.morkaragh.dictadmin.agent.AgentDescription;
 import com.morkaragh.dictadmin.dictionaries.Agent;
 import com.morkaragh.dictadmin.dictionaries.ProgramsDictionary;
 import com.morkaragh.dictadmin.rules.KeyValueRule;
@@ -8,7 +7,6 @@ import com.morkaragh.dictadmin.rules.KeyValueRuleService;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Table extends VerticalLayout {
 
