@@ -1,14 +1,9 @@
 package com.morkaragh.dictadmin.ui.components;
 
-import com.morkaragh.dictadmin.ui.common.Label;
-import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -27,49 +22,75 @@ public class LockButtonSelector extends HorizontalLayout {
     private Button removeBtn;
     private Select<String> selected;
 
+    private String initialValue;
 
     public LockButtonSelector(String caption, List<String> variants, String value, Consumer<String> onSave) {
-        openButton = new Button(caption, new Icon(VaadinIcon.SAFE_LOCK));
-        openButton.addClickListener(e -> setUnlocked());
+        this.initialValue = value;
+        createOpenButton(caption);
+        createSelect(variants, value);
+        createSaveButton(onSave);
+        createCancelButton();
+        createRemoveButton(onSave);
+        createEditButton(value);
+    }
 
-        selected = new Select<>();
-        selected.setWidth("200px");
-        selected.setValue(value);
-        selected.setItems(variants);
-        selected.addValueChangeListener(event -> saveButton.setVisible(StringUtils.isNotBlank(event.getValue())));
+    private void createEditButton(String value) {
+        editBtn = new Button("Редактировать");
+        editBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_TERTIARY);
+        editBtn.addClickListener(event -> setUnlockedState());
 
-        saveButton = new Button("Сохранить", new Icon(VaadinIcon.INBOX));
-        saveButton.setVisible(false);
-        saveButton.addClickListener(event -> {
-            onSave.accept(selected.getValue());
-            setLocked();
-        });
-        saveButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
+        if (StringUtils.isNotBlank(value)) {
+            selected.setValue(value);
+        }
+        setLockedState();
+    }
 
-        cancelButton = new Button("Отмена",new Icon(VaadinIcon.CLOSE_BIG));
-        cancelButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY);
-        cancelButton.addClickListener(e -> setLocked());
-
+    private void createRemoveButton(Consumer<String> onSave) {
         removeBtn = new Button("Удалить", new Icon(VaadinIcon.BAN));
         removeBtn.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY);
         removeBtn.addClickListener(event -> {
             onSave.accept(null);
             selected.setValue(null);
-            setLocked();
+            setLockedState();
         });
-
-        editBtn = new Button("Редактировать");
-        editBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_TERTIARY);
-        editBtn.addClickListener(event -> setUnlocked());
-
-        if (StringUtils.isNotBlank(value)) {
-            selected.setValue(value);
-        }
-        setLocked();
     }
 
+    private void createOpenButton(String caption) {
+        openButton = new Button(caption, new Icon(VaadinIcon.SAFE_LOCK));
+        openButton.addClickListener(e -> setUnlockedState());
+    }
 
-    private void setUnlocked() {
+    private void createSelect(List<String> variants, String value) {
+        selected = new Select<>();
+        selected.setWidth("200px");
+        selected.setValue(value);
+        selected.setItems(variants);
+        selected.addValueChangeListener(event -> saveButton.setVisible(StringUtils.isNotBlank(event.getValue())));
+    }
+
+    private void createSaveButton(Consumer<String> onSave) {
+        saveButton = new Button("Сохранить", new Icon(VaadinIcon.INBOX));
+        saveButton.setVisible(false);
+        saveButton.addClickListener(event -> {
+            onSave.accept(selected.getValue());
+            setLockedState();
+        });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
+    }
+
+    private void createCancelButton() {
+        cancelButton = new Button("Отмена",new Icon(VaadinIcon.CLOSE_BIG));
+        cancelButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY);
+        cancelButton.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
+            @Override
+            public void onComponentEvent(ClickEvent<Button> event) {
+                selected.setValue(initialValue);
+                setLockedState();
+            }
+        });
+    }
+
+    private void setUnlockedState() {
         removeAll();
         add(selected);
         selected.setReadOnly(false);
@@ -77,7 +98,7 @@ public class LockButtonSelector extends HorizontalLayout {
         add(cancelButton);
     }
 
-    private void setLocked() {
+    private void setLockedState() {
         removeAll();
         if (StringUtils.isNotBlank(selected.getValue())) {
             selected.setReadOnly(true);

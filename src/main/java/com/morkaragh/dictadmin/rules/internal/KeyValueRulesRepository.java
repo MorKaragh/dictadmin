@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,4 +16,5 @@ public interface KeyValueRulesRepository extends CrudRepository<KeyValueRule, Lo
 
     KeyValueRule findByEndDateNullAndKey(@NonNull String key);
     List<KeyValueRule> findByKey(@NonNull String key);
+
 }

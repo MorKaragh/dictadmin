@@ -18,34 +18,9 @@ import jakarta.annotation.security.PermitAll;
 
 @PermitAll
 @Route(value="", layout = MainUI.class)
-@PageTitle("Управление правилами")
+@PageTitle("Управление")
 public class ManageView extends HorizontalLayout {
-    private final TextField login;
-    private final TextField fioFld;
-    private final TextField keyFld;
-    private final TextField valueFld;
-    private Button searchBtn;
 
-    public ManageView() {
-        this.fioFld = new TextField("ФИО");
-        this.login = new TextField("Логин");
-        NativeLabel label = new  NativeLabel("Правило");
-        this.keyFld = new TextField("Ключ");
-        this.valueFld = new TextField("Значение");
-        this.searchBtn = new Button("Добавить правило");
-        this.searchBtn.addClickListener(getSearchClickListener());
-        this.searchBtn.addClickShortcut(Key.ENTER);
 
-        setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, login, searchBtn);
 
-        add(label,login);
-        add(keyFld, valueFld, searchBtn);
-    }
-
-    private ComponentEventListener<ClickEvent<Button>> getSearchClickListener() {
-        return e -> {
-            Notification.show("Для логина: " + login.getValue() + " правило : ");
-        };
-    }
 }
