@@ -1,6 +1,6 @@
-package com.morkaragh.dictadmin.rules;
+package com.morkaragh.dictadmin.programfixation;
 
-import com.morkaragh.dictadmin.rules.internal.KeyValueRulesRepository;
+import com.morkaragh.dictadmin.programfixation.internal.KeyValueRulesRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

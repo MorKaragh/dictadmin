@@ -1,7 +1,7 @@
 package com.morkaragh.dictadmin.ui.components;
 
 import com.morkaragh.dictadmin.dictionaries.Agent;
-import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgent;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

@@ -1,7 +1,7 @@
 package com.morkaragh.dictadmin;
 
-import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
-import com.morkaragh.dictadmin.rules.FixedProgramForAgentService;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgent;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

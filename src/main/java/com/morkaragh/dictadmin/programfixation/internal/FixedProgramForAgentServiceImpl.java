@@ -1,7 +1,7 @@
-package com.morkaragh.dictadmin.rules.internal;
+package com.morkaragh.dictadmin.programfixation.internal;
 
-import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
-import com.morkaragh.dictadmin.rules.FixedProgramForAgentService;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgent;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

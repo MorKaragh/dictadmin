@@ -1,4 +1,4 @@
-package com.morkaragh.dictadmin.rules.internal;
+package com.morkaragh.dictadmin.programfixation.internal;
 
 import jakarta.persistence.*;
 

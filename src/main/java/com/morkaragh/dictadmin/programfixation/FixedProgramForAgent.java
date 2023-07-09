@@ -1,7 +1,7 @@
-package com.morkaragh.dictadmin.rules;
+package com.morkaragh.dictadmin.programfixation;
 
 
-import com.morkaragh.dictadmin.rules.internal.Rule;
+import com.morkaragh.dictadmin.programfixation.internal.Rule;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 

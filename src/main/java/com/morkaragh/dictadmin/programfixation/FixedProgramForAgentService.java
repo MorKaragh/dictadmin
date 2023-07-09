@@ -1,4 +1,4 @@
-package com.morkaragh.dictadmin.rules;
+package com.morkaragh.dictadmin.programfixation;
 
 import org.springframework.stereotype.Service;
 

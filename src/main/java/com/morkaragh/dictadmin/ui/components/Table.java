@@ -3,8 +3,8 @@ package com.morkaragh.dictadmin.ui.components;
 import com.morkaragh.dictadmin.dictionaries.Agent;
 import com.morkaragh.dictadmin.dictionaries.Program;
 import com.morkaragh.dictadmin.dictionaries.ProgramsDictionary;
-import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
-import com.morkaragh.dictadmin.rules.FixedProgramForAgentService;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgent;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgentService;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.List;

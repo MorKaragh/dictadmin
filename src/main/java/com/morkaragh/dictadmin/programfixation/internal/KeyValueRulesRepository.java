@@ -1,6 +1,6 @@
-package com.morkaragh.dictadmin.rules.internal;
+package com.morkaragh.dictadmin.programfixation.internal;
 
-import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
+import com.morkaragh.dictadmin.programfixation.FixedProgramForAgent;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
