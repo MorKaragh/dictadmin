@@ -55,7 +55,7 @@ class KeyValueRulesRepositoryTest {
                 .setStartDate(now)
                 .setCreatedBy("Test User"));
 
-        FixedProgramForAgent rule = keyValueRulesRepository.findByEndDateNullAndKey("ADMIN");
+        FixedProgramForAgent rule = keyValueRulesRepository.findByEndDateNullAndKey(hello);
         assertNotNull(rule);
         assertEquals(hello, rule.getKey());
         assertEquals(world, rule.getValue());

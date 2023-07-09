@@ -59,8 +59,8 @@ public class MainUI extends AppLayout {
         // SideNav component.
         AppNav nav = new AppNav();
 
-        nav.addItem(new AppNavItem("Фикс. программы NBO", TableView.class, LineAwesomeIcon.TABLE_SOLID.create()));
-        nav.addItem(new AppNavItem("администрирование", ManageView.class, LineAwesomeIcon.ADDRESS_BOOK.create()));
+        nav.addItem(new AppNavItem("Обяз. программы NBO", TableView.class, LineAwesomeIcon.TABLE_SOLID.create()));
+        nav.addItem(new AppNavItem("Профиль (" + userService.getUser().getShortName() + ")", ManageView.class, LineAwesomeIcon.ADDRESS_BOOK.create()));
 
         return nav;
     }
