@@ -9,13 +9,11 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @Testcontainers
-class KeyValueRuleServiceImplTest {
+class FixedProgramForAgentServiceImplTest {
 
     @SuppressWarnings("rawtypes")
     @Container
@@ -32,12 +30,12 @@ class KeyValueRuleServiceImplTest {
     }
 
     @Autowired
-    KeyValueRuleService service;
+    FixedProgramForAgentService service;
 
     @Test
     void getActualRule() {
-        service.saveNewRule(new KeyValueRule().setValue("value").setKey("key"));
-        KeyValueRule keys = service.getActualRule("key");
+        service.saveNewFixedProgramForAgent(new FixedProgramForAgent().setValue("value").setKey("key"));
+        FixedProgramForAgent keys = service.getActualFixedProgramForAgent("key");
         assertNotNull(keys);
     }
 

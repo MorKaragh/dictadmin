@@ -1,10 +1,10 @@
 package com.morkaragh.dictadmin.ui.view;
 
 
-import com.morkaragh.dictadmin.dictionaries.AgentsDictionary;
-import com.morkaragh.dictadmin.dictionaries.ProgramsDictionary;
-import com.morkaragh.dictadmin.rules.KeyValueRuleService;
-import com.morkaragh.dictadmin.ui.MainUI;
+import com.morkaragh.dictadmin.MainUI;
+import com.morkaragh.dictadmin.dictionaries.internal.AgentsDictionaryImpl;
+import com.morkaragh.dictadmin.dictionaries.internal.ProgramsDictionaryImp;
+import com.morkaragh.dictadmin.rules.FixedProgramForAgentService;
 import com.morkaragh.dictadmin.ui.components.SearchField;
 import com.morkaragh.dictadmin.ui.components.Table;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -14,16 +14,13 @@ import jakarta.annotation.security.PermitAll;
 
 @PermitAll
 @PageTitle("Таблица")
-@Route(value = "table", layout = MainUI.class)
+@Route(value = "", layout = MainUI.class)
 public class TableView extends VerticalLayout {
 
-    private SearchField searchField;
-    private Table table;
-
-    public TableView(KeyValueRuleService service, AgentsDictionary agentsDictionary, ProgramsDictionary programsDictionary) {
+    public TableView(FixedProgramForAgentService service, AgentsDictionaryImpl agentsDictionary, ProgramsDictionaryImp programsDictionaryImp) {
         setSpacing(true);
-        searchField = new SearchField(agentsDictionary, agents -> table.displayAgents(agents));
-        table = new Table(programsDictionary, service);
+        Table table = new Table(programsDictionaryImp, service);
+        SearchField searchField = new SearchField(agentsDictionary, table::displayAgents);
         add(searchField, table);
     }
 }

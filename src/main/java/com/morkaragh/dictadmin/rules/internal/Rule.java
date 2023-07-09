@@ -1,9 +1,7 @@
-package com.morkaragh.dictadmin.rules;
+package com.morkaragh.dictadmin.rules.internal;
 
-import com.morkaragh.dictadmin.user.User;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,8 +21,8 @@ public class Rule {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    @ManyToOne
-    private User createdBy;
+    @Column(name = "created_by")
+    private String createdBy;
 
     public Long getId() {
         return id;
@@ -62,11 +60,11 @@ public class Rule {
         return this;
     }
 
-    public User getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public Rule setCreatedBy(User createdBy) {
+    public Rule setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
     }

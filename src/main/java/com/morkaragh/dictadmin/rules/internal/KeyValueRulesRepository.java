@@ -1,20 +1,18 @@
 package com.morkaragh.dictadmin.rules.internal;
 
-import com.morkaragh.dictadmin.rules.KeyValueRule;
+import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface KeyValueRulesRepository extends CrudRepository<KeyValueRule, Long> {
+public interface KeyValueRulesRepository extends CrudRepository<FixedProgramForAgent, Long> {
 
-    Optional<KeyValueRule> findByCreatedBy_LoginIgnoreCase(String login);
+    FixedProgramForAgent findByEndDateNullAndKey(@NonNull String key);
 
-    KeyValueRule findByEndDateNullAndKey(@NonNull String key);
-    List<KeyValueRule> findByKey(@NonNull String key);
+    List<FixedProgramForAgent> findByKey(@NonNull String key);
+
 
 }

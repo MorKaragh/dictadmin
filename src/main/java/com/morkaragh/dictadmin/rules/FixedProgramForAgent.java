@@ -1,12 +1,12 @@
 package com.morkaragh.dictadmin.rules;
 
 
+import com.morkaragh.dictadmin.rules.internal.Rule;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-public class KeyValueRule extends Rule {
+public class FixedProgramForAgent extends Rule {
 
     @Column(name = "key")
     private String key;
@@ -18,7 +18,7 @@ public class KeyValueRule extends Rule {
         return key;
     }
 
-    public KeyValueRule setKey(String key) {
+    public FixedProgramForAgent setKey(String key) {
         this.key = key;
         return this;
     }
@@ -27,7 +27,7 @@ public class KeyValueRule extends Rule {
         return value;
     }
 
-    public KeyValueRule setValue(String value) {
+    public FixedProgramForAgent setValue(String value) {
         this.value = value;
         return this;
     }

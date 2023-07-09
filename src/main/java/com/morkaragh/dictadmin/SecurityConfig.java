@@ -1,4 +1,4 @@
-package com.morkaragh.dictadmin.auth;
+package com.morkaragh.dictadmin;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Configuration;

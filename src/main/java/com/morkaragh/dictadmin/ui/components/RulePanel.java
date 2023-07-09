@@ -1,7 +1,7 @@
 package com.morkaragh.dictadmin.ui.components;
 
 import com.morkaragh.dictadmin.dictionaries.Agent;
-import com.morkaragh.dictadmin.rules.KeyValueRule;
+import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -17,9 +17,9 @@ public class RulePanel extends HorizontalLayout {
         this.add(header, agentName, agentDescription, value);
     }
 
-    public void init(Agent agent, KeyValueRule keyValueRule){
+    public void init(Agent agent, FixedProgramForAgent fixedProgramForAgent) {
         agentName.setText(agent.getName());
         agentDescription.setText(agent.getDescription());
-        value.setText(keyValueRule.getValue());
+        value.setText(fixedProgramForAgent.getValue());
     }
 }

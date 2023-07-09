@@ -1,10 +1,11 @@
-package com.morkaragh.dictadmin.ui;
+package com.morkaragh.dictadmin;
 
 
 import com.morkaragh.dictadmin.ui.components.AppNav;
 import com.morkaragh.dictadmin.ui.components.AppNavItem;
 import com.morkaragh.dictadmin.ui.view.ManageView;
 import com.morkaragh.dictadmin.ui.view.TableView;
+import com.morkaragh.dictadmin.user.UserService;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Footer;
@@ -20,7 +21,10 @@ public class MainUI extends AppLayout {
 
     private H2 viewTitle;
 
-    public MainUI() {
+    private final UserService userService;
+
+    public MainUI(UserService userService) {
+        this.userService = userService;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -29,15 +33,17 @@ public class MainUI extends AppLayout {
     private void addHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
         toggle.getElement().setAttribute("aria-label", "Menu toggle");
-
         viewTitle = new H2();
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
-
         addToNavbar(true, toggle, viewTitle);
     }
 
     private void addDrawerContent() {
-        H1 appName = new H1("Админка");
+        H1 appName = new H1("Ay-Man");
+        appName.getStyle().set("text-align", "center")
+                .set("color", "firebrick")
+                .set("font-family", "math");
+
         appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
         Header header = new Header(appName);
 
@@ -53,15 +59,15 @@ public class MainUI extends AppLayout {
         // SideNav component.
         AppNav nav = new AppNav();
 
-        nav.addItem(new AppNavItem("Управление", ManageView.class, LineAwesomeIcon.ADDRESS_BOOK.create()));
-        nav.addItem(new AppNavItem("Таблица", TableView.class, LineAwesomeIcon.TABLE_SOLID.create()));
+        nav.addItem(new AppNavItem("Фикс. программы NBO", TableView.class, LineAwesomeIcon.TABLE_SOLID.create()));
+        nav.addItem(new AppNavItem("администрирование", ManageView.class, LineAwesomeIcon.ADDRESS_BOOK.create()));
 
         return nav;
     }
 
     private Footer createFooter() {
         Footer layout = new Footer();
-
+        layout.add(userService.getUser().getFullName());
         return layout;
     }
 

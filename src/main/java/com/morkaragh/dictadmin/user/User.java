@@ -1,46 +1,17 @@
 package com.morkaragh.dictadmin.user;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private final OAuth2AuthenticationToken oAuth2AuthenticationToken;
 
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "full_name")
-    private String fullName;
-
-    public Long getId() {
-        return id;
-    }
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public User setLogin(String login) {
-        this.login = login;
-        return this;
+    public User(Authentication oAuth2AuthenticationToken) {
+        this.oAuth2AuthenticationToken = (OAuth2AuthenticationToken) oAuth2AuthenticationToken;
     }
 
     public String getFullName() {
-        return fullName;
-    }
-
-    public User setFullName(String fullName) {
-        this.fullName = fullName;
-        return this;
+        return oAuth2AuthenticationToken.getPrincipal().getAttribute("name");
     }
 }

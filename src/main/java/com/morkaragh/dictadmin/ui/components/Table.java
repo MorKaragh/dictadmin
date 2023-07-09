@@ -1,9 +1,10 @@
 package com.morkaragh.dictadmin.ui.components;
 
 import com.morkaragh.dictadmin.dictionaries.Agent;
+import com.morkaragh.dictadmin.dictionaries.Program;
 import com.morkaragh.dictadmin.dictionaries.ProgramsDictionary;
-import com.morkaragh.dictadmin.rules.KeyValueRule;
-import com.morkaragh.dictadmin.rules.KeyValueRuleService;
+import com.morkaragh.dictadmin.rules.FixedProgramForAgent;
+import com.morkaragh.dictadmin.rules.FixedProgramForAgentService;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.List;
@@ -11,22 +12,25 @@ import java.util.List;
 public class Table extends VerticalLayout {
 
     private final ProgramsDictionary programsDict;
-    private final KeyValueRuleService ruleService;
+    private final FixedProgramForAgentService fixedProgramForAgentService;
 
-    public Table(ProgramsDictionary programsDict, KeyValueRuleService ruleService) {
+
+    public Table(ProgramsDictionary programsDict, FixedProgramForAgentService fixedProgramForAgentService) {
         this.programsDict = programsDict;
-        this.ruleService = ruleService;
+        this.fixedProgramForAgentService = fixedProgramForAgentService;
     }
 
     public void displayAgents(List<Agent> agents) {
         removeAll();
         for (Agent agent : agents) {
-            KeyValueRule actualRule = ruleService.getActualRule(agent.getId());
-            add(new AgentDescription(agent, actualRule, programsDict.getPrograms(),
+            FixedProgramForAgent actualRule = fixedProgramForAgentService.getActualFixedProgramForAgent(agent.getId());
+            add(new AgentDescription(agent,
+                    actualRule,
+                    programsDict.getPrograms().stream().map(Program::getName).toList(),
                     s -> {
-                        ruleService.deactivateActualRule(agent.getId());
+                        fixedProgramForAgentService.deactivateFixedProgramForAgent(agent.getId());
                         if (s != null) {
-                            ruleService.saveNewRule(new KeyValueRule().setKey(agent.getId()).setValue(s));
+                            fixedProgramForAgentService.saveNewFixedProgramForAgent(new FixedProgramForAgent().setKey(agent.getId()).setValue(s));
                         }
                     }));
         }
